@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rio | Personal Profile</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* Background */
+    body::before{
+      content:'';
+      position:fixed;
+      width:100%;
+      height:100%;
+      background:
+      radial-gradient(circle at top left,#00f7ff33,transparent 30%),
+      radial-gradient(circle at bottom right,#8b5cf633,transparent 30%),
+      linear-gradient(135deg,#050816,#0b1023,#111827);
+      z-index:-3;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:100%;
+      height:100%;
+      background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size:40px 40px;
+      z-index:-2;
+    }
+
+    .floating-blur{
+      position:fixed;
+      width:400px;
+      height:400px;
+      border-radius:50%;
+      background:#00f7ff15;
+      filter:blur(80px);
+      z-index:-1;
+      animation:float 8s ease-in-out infinite alternate;
+    }
+
+    .floating-blur:nth-child(1){
+      top:-100px;
+      left:-100px;
+    }
+
+    .floating-blur:nth-child(2){
+      bottom:-100px;
+      right:-100px;
+      background:#8b5cf620;
+      animation-delay:2s;
+    }
+
+    @keyframes float{
+      from{
+        transform:translateY(0px) translateX(0px);
+      }
+      to{
+        transform:translateY(40px) translateX(30px);
+      }
+    }
+
+    /* Navbar */
+    nav{
+      width:100%;
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(15px);
+      background:rgba(0,0,0,0.25);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    nav h2{
+      font-size:1.5rem;
+      font-weight:700;
+      letter-spacing:2px;
+      color:#00f7ff;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      font-size:0.95rem;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#00f7ff;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:120px 8% 60px;
+      gap:60px;
+      flex-wrap:wrap;
+    }
+
+    .hero-text{
+      flex:1;
+      min-width:300px;
+    }
+
+    .hero-text h1{
+      font-size:4rem;
+      line-height:1.1;
+      margin-bottom:20px;
+      font-weight:800;
+    }
+
+    .hero-text h1 span{
+      color:#00f7ff;
+    }
+
+    .hero-text p{
+      color:#cfcfcf;
+      line-height:1.8;
+      max-width:600px;
+      margin-bottom:30px;
+    }
+
+    .hero-btns{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:14px 28px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,#00f7ff,#8b5cf6);
+      color:white;
+      box-shadow:0 0 25px #00f7ff55;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 35px #00f7ff88;
+    }
+
+    .btn-outline{
+      border:1px solid rgba(255,255,255,0.2);
+      color:white;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(10px);
+    }
+
+    .btn-outline:hover{
+      background:#ffffff15;
+    }
+
+    .hero-card{
+      flex:1;
+      min-width:300px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .glass-card{
+      width:100%;
+      max-width:420px;
+      padding:35px;
+      border-radius:30px;
+      background:rgba(255,255,255,0.06);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:0 0 40px rgba(0,0,0,0.4);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .glass-card::before{
+      content:'';
+      position:absolute;
+      width:180px;
+      height:180px;
+      background:#00f7ff22;
+      border-radius:50%;
+      top:-60px;
+      right:-60px;
+      filter:blur(20px);
+    }
+
+    .profile-top{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      margin-bottom:25px;
+    }
+
+    .profile-img{
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#00f7ff,#8b5cf6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:2rem;
+      font-weight:700;
+      box-shadow:0 0 25px #00f7ff66;
+    }
+
+    .profile-info h3{
+      font-size:1.5rem;
+      margin-bottom:5px;
+    }
+
+    .profile-info p{
+      color:#bbb;
+      font-size:0.9rem;
+    }
+
+    .info-box{
+      margin-top:18px;
+      padding:15px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      gap:15px;
+      align-items:flex-start;
+    }
+
+    .info-box i{
+      color:#00f7ff;
+      font-size:1.2rem;
+      margin-top:5px;
+    }
+
+    .info-box h4{
+      margin-bottom:4px;
+      font-size:1rem;
+    }
+
+    .info-box p{
+      color:#cfcfcf;
+      font-size:0.9rem;
+    }
+
+    /* Section */
+    section{
+      padding:90px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:2.8rem;
+      margin-bottom:10px;
+    }
+
+    .section-title span{
+      color:#00f7ff;
+    }
+
+    .section-title p{
+      color:#bbb;
+    }
+
+    /* Cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:25px;
+      padding:30px;
+      transition:0.4s;
+      backdrop-filter:blur(12px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      width:150px;
+      height:150px;
+      background:#00f7ff10;
+      border-radius:50%;
+      top:-60px;
+      right:-50px;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 30px rgba(0,247,255,0.15);
+    }
+
+    .card i{
+      font-size:2rem;
+      margin-bottom:20px;
+      color:#00f7ff;
+    }
+
+    .card h3{
+      margin-bottom:10px;
+      font-size:1.2rem;
+    }
+
+    .card p{
+      color:#cfcfcf;
+      line-height:1.7;
+      font-size:0.95rem;
+    }
+
+    /* Footer */
+    footer{
+      padding:30px 8%;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.03);
+      color:#aaa;
+    }
+
+    .socials{
+      margin-top:20px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .socials a{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .socials a:hover{
+      background:linear-gradient(135deg,#00f7ff,#8b5cf6);
+      transform:translateY(-5px);
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .hero-text h1{
+        font-size:3rem;
+      }
+
+      .hero-btns{
+        justify-content:center;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      nav ul{
+        gap:18px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+    }
+
+    @media(max-width:600px){
+      .hero-text h1{
+        font-size:2.4rem;
+      }
+
+      .section-title h2{
+        font-size:2rem;
+      }
+
+      .glass-card{
+        padding:25px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="floating-blur"></div>
+  <div class="floating-blur"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <h2>RIO.</h2>
+
+    <ul>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#education">Pendidikan</a></li>
+      <li><a href="#skills">Keahlian</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="about">
+
+    <div class="hero-text">
+      <h1>
+        Tech Personal <br>
+        <span>Profile Website</span>
+      </h1>
+
+      <p>
+        Halo, saya <b>Maximilianus Mario Mone</b> atau biasa dipanggil <b>Rio</b>.
+        Saya memiliki ketertarikan pada dunia teknologi, desain modern,
+        dan pengembangan diri. Saya juga memiliki kemampuan dalam bermain trading
+        serta suka mempelajari hal-hal baru untuk meningkatkan skill dan pengalaman.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#skills" class="btn btn-primary">
+          <i class="fa-solid fa-bolt"></i>
+          Explore Skill
+        </a>
+
+        <a href="#contact" class="btn btn-outline">
+          <i class="fa-solid fa-user"></i>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="glass-card">
+
+        <div class="profile-top">
+          <div class="profile-img">
+            R
+          </div>
+
+          <div class="profile-info">
+            <h3>Rio</h3>
+            <p>Future Tech Person</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <h4>Tempat Lahir</h4>
+            <p>Lolokalayo</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <i class="fa-solid fa-futbol"></i>
+          <div>
+            <h4>Hobi Akademik</h4>
+            <p>Bermain Bola</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <i class="fa-solid fa-book-open"></i>
+          <div>
+            <h4>Hobi Non Akademik</h4>
+            <p>Belajar Hal Baru</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+
+    <div class="section-title">
+      <h2>Riwayat <span>Pendidikan</span></h2>
+      <p>Perjalanan pendidikan yang telah ditempuh</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <i class="fa-solid fa-school"></i>
+        <h3>SDK Gallu Wawi</h3>
+        <p>
+          Menempuh pendidikan dasar dan mulai mengenal banyak pengalaman baru.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h3>St Maria Hombakaripit</h3>
+        <p>
+          Menjalani pendidikan SMA dengan semangat belajar dan pengembangan diri.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-building-columns"></i>
+        <h3>UNMAS</h3>
+        <p>
+          Sedang menempuh pendidikan S1 dan terus meningkatkan kemampuan di berbagai bidang.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+
+    <div class="section-title">
+      <h2>Keahlian & <span>Pengalaman</span></h2>
+      <p>Kemampuan dan pengalaman yang dimiliki</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Trading</h3>
+        <p>
+          Memiliki kemampuan dalam bermain trading dan memahami analisa dasar market.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-helmet-safety"></i>
+        <h3>Riwayat Kerja</h3>
+        <p>
+          Pernah bekerja di proyek dan memiliki pengalaman kerja lapangan.
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-lightbulb"></i>
+        <h3>Mindset Belajar</h3>
+        <p>
+          Selalu tertarik mempelajari hal baru untuk meningkatkan kemampuan dan wawasan.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+
+    <div class="section-title">
+      <h2>Let's <span>Connect</span></h2>
+      <p>Terhubung dan berkembang bersama</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <i class="fa-solid fa-user"></i>
+        <h3>Nama Lengkap</h3>
+        <p>Maximilianus Mario Mone</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-earth-asia"></i>
+        <h3>Nickname</h3>
+        <p>Rio</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-code"></i>
+        <h3>Vision</h3>
+        <p>
+          Menjadi pribadi yang terus berkembang di dunia teknologi dan digital.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 Rio Personal Website • Modern Tech UI Design
+  </footer>
+
+</body>
+</html>
